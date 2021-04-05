@@ -64,6 +64,14 @@ if grep -Fx "void" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
     systemctl restart pveproxy.service
 fi
 
+#4: Optimisation SWAP
+echo "- Paramatrage du SWAP pour qu'il ne s'active que lorsqu'il ne reste plus que 10% de RAM dispo"
+sysctl vm.swappiness=10
+echo "- Désactivation du SWAP"
+swapoff -a
+echo "- Activation du SWAP"
+swapon -a
+
 echo "----------------------------------------------------------------"
 echo "Fin du script"
 echo "----------------------------------------------------------------"
