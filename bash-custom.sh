@@ -25,7 +25,7 @@ echo "- Personnaliser la commande ls"
 if grep -Fq "# export LS_OPTIONS" .bashrc
   then
     echo "- LS option color commentée"
-    sed -i 's/#//' .bashrc
+    sed -i.bak 's/# export LS_OPTION/export LS_OPTION/' .bashrc
   else
     echo "- LS option color déja non commentée"
 fi
