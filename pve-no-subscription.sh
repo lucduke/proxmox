@@ -10,7 +10,6 @@
 # https://pve.proxmox.com/wiki/Package_Repositories#sysadmin_no_subscription_repo
 
 # VARIABLES
-proxmoxlib="/usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js"
 distribution=$(grep -F "VERSION_CODENAME=" /etc/os-release | cut -d= -f2)
 timestamp=$(date +%s)
 
