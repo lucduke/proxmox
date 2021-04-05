@@ -10,7 +10,7 @@
 # https://doc.ubuntu-fr.org/ls_couleur
 
 # VARIABLES
-
+timestamp=$(date +%s)
 
 echo "----------------------------------------------------------------"
 echo "Debut du script"
