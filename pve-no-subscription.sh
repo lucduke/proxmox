@@ -28,7 +28,7 @@ if grep -Fxq "#deb https://enterprise.proxmox.com/debian/pve $distribution pve-e
   then
     echo "- Dépôt déja commenté"
   else
-    echo "- Masquage du dépôt"
+    echo "- Masquage du dépôt en ajoutant # à la première ligne"
     sed -i 's/^/#/' /etc/apt/sources.list.d/pbs-enterprise.list
 fi
 
@@ -42,7 +42,7 @@ if grep -Fxq "deb http://download.proxmox.com/debian/pve $distribution pve-no-su
     echo "- Dépôt déja présent"
   else
     echo "- Ajout du dépôt pve-no-subscription"
-    sed -i "\$adeb http://download.proxmox.com/debian/pve $distribution pve-no-subscription" /etc/apt/sources.list
+    echo "deb http://download.proxmox.com/debian/pve $distribution pve-no-subscription" >> /etc/apt/sources.list
 fi
 
 #3: MAJ
@@ -52,15 +52,7 @@ apt full-upgrade -y
 
 
 #4: Remove Subscription:
-#checking if file is already edited in order to not edit again
-if grep -Ewqi "void" $proxmoxlib; then
-echo "- Subscription Message already removed - Skipping"
-else
-if [ -d "$pve_log_folder" ]; then
-echo "- Removing No Valid Subscription Message for PVE"
-sed -Ezi.bak "s/(Ext.Msg.show\(\{\s+title: gettext\('No valid sub)/void\(\{ \/\/\1/g" $proxmoxlib && systemctl restart pveproxy.service
-else 
-echo "- Removing No Valid Subscription Message for PBS"
-sed -Ezi.bak "s/(Ext.Msg.show\(\{\s+title: gettext\('No valid sub)/void\(\{ \/\/\1/g" $proxmoxlib && systemctl restart proxmox-backup-proxy.service
-fi
-fi
+
+echo "----------------------------------------------------------------"
+echo "Fin du script"
+echo "----------------------------------------------------------------"
