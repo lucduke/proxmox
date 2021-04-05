@@ -34,7 +34,7 @@ echo "- Personnaliser la commande ls 2/3"
 if grep -Fq "# eval \"\`dircolors\`\"" .bashrc
   then
     echo "- LS option color commentée 2/3"
-    sed -i.bak 's/# eval \"\`dircolors\`\"/eval \"\`dircolors\`\"/' .bashrc
+    sed -i.bak "s/# eval \"\`dircolors\`\"/eval \"\`dircolors\`\"/" .bashrc
   else
     echo "- LS option color déja non commentée 2/3"
 fi
