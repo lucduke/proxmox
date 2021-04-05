@@ -22,7 +22,19 @@ cd ~
 cp .bashrc bashrc-$timestamp.bak
 
 echo "- Personnaliser la commande ls"
-echo "alias ls="ls --color=auto"" >> .bashrc
+if grep -Fq "# export LS_OPTIONS" .bashrc
+  then
+    echo "- LS option color commentée"
+    sed -i 's/#//' .bashrc
+  else
+    echo "- LS option color déja non commentée"
+fi
+
+# You may uncomment the following lines if you want `ls' to be colorized:
+# export LS_OPTIONS='--color=auto'
+# eval "`dircolors`"
+# alias ls='ls $LS_OPTIONS'
+
 
 echo "----------------------------------------------------------------"
 echo "Fin du script"
