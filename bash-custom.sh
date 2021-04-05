@@ -22,7 +22,7 @@ cd ~
 cp .bashrc bashrc-$timestamp.bak
 
 echo "- Personnaliser la commande ls"
-alias ls='ls --color' >> .bashrc
+echo "alias ls="ls --color=auto"" >> .bashrc
 
 echo "----------------------------------------------------------------"
 echo "Fin du script"
