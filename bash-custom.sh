@@ -25,7 +25,7 @@ echo "- Personnaliser la commande ls 1/3"
 if grep -Fq "# export LS_OPTIONS" .bashrc
   then
     echo "- LS option color commentée 1/3"
-    sed -i.bak 's/# export LS_OPTION/export LS_OPTION/' .bashrc
+    sed -i.bak "s/# export LS_OPTION/export LS_OPTION/" .bashrc
   else
     echo "- LS option color déja non commentée 1/3"
 fi
@@ -39,10 +39,14 @@ if grep -Fq "# eval \"\`dircolors\`\"" .bashrc
     echo "- LS option color déja non commentée 2/3"
 fi
 
-# You may uncomment the following lines if you want `ls' to be colorized:
-# eval "`dircolors`"
-# alias ls='ls $LS_OPTIONS'
-
+echo "- Personnaliser la commande ls 3/3"
+if grep -Fq "# alias ls=" .bashrc
+  then
+    echo "- LS option color commentée 3/3"
+    sed -i.bak "s/# alias ls=/alias ls=/" .bashrc
+  else
+    echo "- LS option color déja non commentée 3/3"
+fi
 
 echo "----------------------------------------------------------------"
 echo "Fin du script"
