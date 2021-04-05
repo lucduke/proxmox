@@ -29,7 +29,7 @@ if grep -Fxq "#deb https://enterprise.proxmox.com/debian/pve $distribution pve-e
     echo "- Dépôt déja commenté"
   else
     echo "- Masquage du dépôt en ajoutant # à la première ligne"
-    sed -i 's/^/#/' /etc/apt/sources.list.d/pbs-enterprise.list
+    sed -i 's/^/#/' /etc/apt/sources.list.d/pve-enterprise.list
 fi
 
 # pve-no-subscription
