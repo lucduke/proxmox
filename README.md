@@ -14,7 +14,13 @@ Pour lancer le script
 wget -q -O - https://raw.githubusercontent.com/lucduke/proxmox/main/pve-no-subscription.sh | bash
 ```
 
+### Personnaliser bash
 
+Pour lancer le script
+
+```bash
+wget -q -O - https://raw.githubusercontent.com/lucduke/proxmox/main/bash-custom.sh | bash
+```
 
 ## Sources
 
