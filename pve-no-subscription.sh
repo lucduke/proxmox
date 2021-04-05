@@ -55,13 +55,14 @@ apt full-upgrade -y
 echo "- Sauvegarde proxmoxlib.js"
 cp /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib-$timestamp.bak
 
-echo "- Verificiation"
+echo "- Verificiation pop-up souscription"
 if grep -Fx "void" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
   then
+    echo "- Modification déja présente"
+  else
+    echo "- Application modification"
     sed -Ezi.bak "s/(Ext.Msg.show\(\{\s+title: gettext\('No valid sub)/void\(\{ \/\/\1/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
     systemctl restart pveproxy.service
-  else
-    echo "- Modification déja présente"
 fi
 
 echo "----------------------------------------------------------------"
