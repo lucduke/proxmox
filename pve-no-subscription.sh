@@ -51,7 +51,18 @@ apt update -y
 apt full-upgrade -y
 
 
-#4: Remove Subscription:
+#4: Supprimer le pop-up de souscription
+echo "- Sauvegarde proxmoxlib.js"
+cp /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib-$timestamp.bak
+
+echo "- Verificiation"
+if grep -Fx "void" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+  then
+    sed -Ezi.bak "s/(Ext.Msg.show\(\{\s+title: gettext\('No valid sub)/void\(\{ \/\/\1/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+    systemctl restart pveproxy.service
+  else
+    echo "- Modification déja présente"
+fi
 
 echo "----------------------------------------------------------------"
 echo "Fin du script"
