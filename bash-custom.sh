@@ -19,7 +19,7 @@ echo "----------------------------------------------------------------"
 #1 Personnaliser la commande ls
 echo "- Sauvegarder la configuration bash de l'utilisateur courant"
 cd ~
-cp .bashrc bashrc-$timestamp.bak
+cp .bashrc .bashrc-$timestamp.bak
 
 echo "- Personnaliser la commande ls 1/3"
 if grep -Fq "# export LS_OPTIONS" .bashrc
