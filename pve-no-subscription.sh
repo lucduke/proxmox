@@ -4,7 +4,7 @@
 # Rejoins moi sur Youtube: https://www.youtube.com/channel/UCsJ-FHnCEvtV4m3-nTdR5QQ
 
 # USAGE
-# wget -q -O - https://github.com/lucduke/proxmox/edit/main/pve-no-subscription.sh | bash
+# wget -q -O - https://github.com/lucduke/proxmox/blob/main/pve-no-subscription.sh | bash
 
 # SOURCES
 # https://pve.proxmox.com/wiki/Package_Repositories#sysadmin_no_subscription_repo
