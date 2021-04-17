@@ -11,7 +11,11 @@ Série de scripts / commandes permettant de personnaliser l'installation de Prox
 
 
 ## Installation à partir de l'ISO officiel
-Le fichier ISO de Proxmox Virtual Environment est disponible en téléchargement sur le site de Proxox (  
+Le fichier ISO de Proxmox Virtual Environment est disponible en téléchargement sur le site de Proxox
+[lien vers ISO PVE]:(https://www.proxmox.com/en/downloads/category/iso-images-pve)
+
+Le plus simple est ensuite de copier cet ISO sur une clef USB où vous aurez préalablement installé le logiciel Ventoy
+[Lien vers Ventoy]:(https://www.ventoy.net/en/index.html)
 
 
 
