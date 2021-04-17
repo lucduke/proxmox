@@ -4,25 +4,17 @@
 
 ## Introduction
 
-Série de scripts permettant de personnaliser l'installation de Proxmox Virtual Environment
+Série d'article de scripts permettant de personnaliser l'installation de Proxmox Virtual Environment
 
-### Maj des dépôts / désactivation du pop-up de souscription / optimisation du SWAP
 
-Pour lancer le script
 
-```bash
-wget -q -O - https://raw.githubusercontent.com/lucduke/proxmox/main/pve-no-subscription.sh | bash
-```
+## Installation de PVE et premières configuration
 
-### Personnaliser bash
+[Lien]: ./1-installation.md	""Lien vers l'artcile""
 
-Pour lancer le script
 
-```bash
-wget -q -O - https://raw.githubusercontent.com/lucduke/proxmox/main/bash-custom.sh | bash
-```
 
-## Sources
+## Références
 
 https://www.proxmox.com/en/
 
