@@ -14,6 +14,12 @@ Série d'article de scripts permettant de personnaliser l'installation de Proxmo
 
 
 
+## Installation d'OMV 5
+
+[Lien vers l'article](./2-install_omv5.md)
+
+
+
 
 ## Références
 
