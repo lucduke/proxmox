@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Série d'article de scripts permettant de personnaliser l'installation de Proxmox Virtual Environment
+Série d'articles / de scripts permettant de personnaliser l'installation de Proxmox Virtual Environment
 
 
 
