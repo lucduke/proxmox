@@ -6,6 +6,8 @@
 
 Série d'articles / de scripts permettant de personnaliser l'installation de Proxmox Virtual Environment
 
+Proxmox Virtual Environment est une solution de virtualisation libre basée sur l'hyperviseur Linux KVM. Proxmox offre également une solution de containers avec LXC
+
 
 
 ## Installation de PVE et premières configurations
