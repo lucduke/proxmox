@@ -7,6 +7,13 @@
 Série de scripts / commandes permettant de personnaliser l'installation de Proxmox Virtual Environment
 
 
+## Liens vers la vidéo
+
+
+## Installation à partir de l'ISO officiel
+Le fichier ISO de Proxmox Virtual Environment est disponible en téléchargement sur le site de Proxox (  
+
+
 
 ## Maj les dépôts / désactivation du pop-up de souscription / optimisation du SWAP
 
