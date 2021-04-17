@@ -10,7 +10,7 @@ Série d'article de scripts permettant de personnaliser l'installation de Proxmo
 
 ## Installation de PVE et premières configuration
 
-[Lien]: ./1-installation.md	""Lien vers l'artcile""
+[Lien vers l'article]: ./1-installation.md
 
 
 
