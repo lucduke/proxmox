@@ -13,7 +13,7 @@ wget -O openmediavault_5.5.11-amd64.iso https://sourceforge.net/projects/openmed
 
 ## Création d'une VM
 
-cf. vidéo
+[Lien vers la vidéo Youtube](https://youtu.be/4BBNEMUPaBo)
 
 
 
