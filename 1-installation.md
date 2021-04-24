@@ -9,6 +9,8 @@ Série de scripts / commandes permettant de personnaliser l'installation de Prox
 
 ## Liens vers la vidéo
 
+[Lien vers la vidéo Youtube](https://youtu.be/PJS46zHgErA)
+
 
 ## Installation à partir de l'ISO officiel
 Le fichier ISO de Proxmox Virtual Environment est disponible en téléchargement sur le site de Proxox
