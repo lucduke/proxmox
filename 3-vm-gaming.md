@@ -11,7 +11,7 @@ Il faut activer cette fonction dans le bios de la carte mère de votre hôte Pro
 Dans mon cas, une carte mère ASUS, les 2 paramètres à activer sont :
 
 - Activer Intel VT-d (System Agent Configuration > VT-d)
-- Activer la virtualisation du processus (CPU Configuration > Intel Virtualisation Technology)
+- Activer la virtualisation du processeur (CPU Configuration > Intel Virtualisation Technology)
 
 
 
@@ -56,7 +56,7 @@ find /sys/kernel/iommu_groups/ -type l
 
 
 
-## Etape 3 : Ajouter des modules VFIO (Virtual Function i/O) au noyau Linux
+## Etape 3 : Ajouter des modules VFIO (Virtual Function I/O) au noyau Linux
 
 ```bash
 # Ajouter les modules suivants
