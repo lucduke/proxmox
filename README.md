@@ -4,9 +4,9 @@
 
 ## Introduction
 
-Série d'articles / de scripts permettant de personnaliser l'installation de Proxmox Virtual Environment
+Série d'articles / de scripts permettant de personnaliser l'installation de **Proxmox Virtual Environment**
 
-Proxmox Virtual Environment est une solution de virtualisation libre basée sur l'hyperviseur Linux KVM. Proxmox offre également une solution de containers avec LXC
+**Proxmox Virtual Environment** est une solution de virtualisation libre basée sur **l'hyperviseur Linux KVM**. **Proxmox** offre également une solution de containers avec **LXC**
 
 
 
@@ -19,6 +19,12 @@ Proxmox Virtual Environment est une solution de virtualisation libre basée sur 
 ## Installation d'OMV 5
 
 [Lien vers l'article](./2-install_omv5.md)
+
+
+
+## Création d'une VM gaming Win10
+
+[Lien vers l'article](./3-vm-gaming.md)
 
 
 
