@@ -8,7 +8,7 @@
 
 # SOURCES
 # https://pve.proxmox.com/wiki/Package_Repositories#sysadmin_no_subscription_repo
-# https://github.com/Tontonjo/proxmox/blob/master/pve_pbs_nosubscription_noenterprisesources.sh
+# https://github.com/Tontonjo/proxmox/
 
 # VARIABLES
 distribution=$(grep -F "VERSION_CODENAME=" /etc/os-release | cut -d= -f2)
