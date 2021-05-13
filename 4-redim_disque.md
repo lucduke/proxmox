@@ -17,6 +17,8 @@ Se connecter en SSH sur son serveur OMV
 blkid
 # Dans mon cas le résultat est le suivant pour ma partition SWAP
 # /dev/sda5: UUID="5844007e-b637-48c0-a974-5878ddec61b2" TYPE="swap" PARTUUID="ab604992-05"
+
+/dev/sda5: UUID="647ae9ed-9991-4f79-9322-9faf270c619e" TYPE="swap" PARTUUID="a26bbb8c-05"
 ````
 
 
