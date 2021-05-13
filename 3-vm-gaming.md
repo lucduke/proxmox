@@ -139,13 +139,15 @@ dmesg | grep 'remapping'
 
 ##### Onglet disque dur
 
-1- Bus = SATA
+1- Bus = SCSI
 
 2- Taille = A votre convenance
 
 3- Cache = Write back
 
 4- Discard = true --> si votre volume est sur un SSD
+
+5- Emulation de SSD --> si votre volume est sur un SSD
 
 ##### Onglet CPU
 
@@ -154,6 +156,8 @@ dmesg | grep 'remapping'
 ##### Onglet mémoire
 
 1- Mémoire : 4096 Mo (ou +)
+
+2- Décocher périphérique de ballooning
 
 ##### Onglet réseau
 
