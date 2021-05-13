@@ -28,7 +28,7 @@ Série d'articles / de scripts permettant de personnaliser l'installation de **P
 
 
 
-## Extension de sa partition principaleOMV
+## Extension de sa partition principale OMV
 
 [Lien vers l'article](./4-redim_disque.md)
 
