@@ -18,8 +18,8 @@ echo "----------------------------------------------------------------"
 
 # Modification GRUB
 
-echo "Sauvegarde GRUB et ajout intel_iommu=on"
-sed -i.${timestamp}.bak 's/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet\"/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet intel_iommu=on\"/' /etc/default/grub
+echo "Sauvegarde GRUB et ajout intel_iommu=on iommu=pt i915.enable_gvt=1"
+sed -i.${timestamp}.bak 's/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet\"/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet intel_iommu=on iommu=pt i915.enable_gvt=1\"/' /etc/default/grub
 
 echo "lancement commande update-grub"
 update-grub
