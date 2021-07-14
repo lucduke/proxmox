@@ -33,6 +33,13 @@ Série d'articles / de scripts permettant de personnaliser l'installation de **P
 [Lien vers l'article](./4-redim_disque.md)
 
 
+
+## Upgrade vers Proxmox 7.0
+
+[Lien vers l'article](./5-proxmox7.md)
+
+
+
 ## Références
 
 https://www.proxmox.com/en/
