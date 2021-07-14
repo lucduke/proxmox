@@ -19,7 +19,7 @@ La release note est disponible ici : https://pve.proxmox.com/wiki/Roadmap#Proxmo
 
 
 ## Tutoriel vidéo
-
+[lien](https://youtu.be/cfUCejR8ads)
 
 
 
