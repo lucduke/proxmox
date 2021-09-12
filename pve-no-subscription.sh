@@ -61,7 +61,7 @@ if grep -Fx "void" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
     echo "- Modification déja présente"
   else
     echo "- Application modification"
-    sed -Ezi.bak "s/(Ext.Msg.show\(\{\s+title: gettext\('No valid sub)/void\(\{ \/\/\1/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+    sed -Ezi.bak "s/(Ext.Msg.show\(\{\s+title: gettext\('No valid subscription')/void\(\{ \/\/\1/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
     systemctl restart pveproxy.service
 fi
 
