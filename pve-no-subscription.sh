@@ -56,7 +56,7 @@ echo "- Sauvegarde proxmoxlib.js"
 cp /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib-$timestamp.bak
 
 echo "- Verificiation pop-up souscription"
-if grep -Fx "void({ //Ext.Msg.show({" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+if [ $(grep -Fx "void({ //Ext.Msg.show({" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js) -ne 0 ]
   then
     echo "- Modification déja présente"
   else
