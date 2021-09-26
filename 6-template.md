@@ -60,7 +60,7 @@ sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io 
 sudo docker run hello-world
 
-# On instale docker-compose
+# On installe docker-compose
 # Source: https://docs.docker.com/compose/install/
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
@@ -82,7 +82,7 @@ sudo docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -
 ## Anonymisation de la VM
 
 ```bash
-# Suppression des clefs SSH (elle seront regenérées par cloud-init)
+# Suppression des clefs SSH
 sudo rm sudo rm /etc/ssh/ssh_host_*
 
 # Suppression du machine-id
@@ -102,7 +102,7 @@ sudo poweroff
 
 ## Quelques étapes avant de convertir la VM en template
 
-1- Supprimer le CD-ROM dans l'onglet matériel
+1- Enlever le CD-ROM dans l'onglet matériel
 
 
 
