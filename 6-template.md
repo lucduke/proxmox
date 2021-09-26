@@ -91,7 +91,7 @@ sudo rm /var/lib/dbus/machine-id
 sudo ln -s /etc/machine-id /var/lib/dbus/machine-id
 
 # Nettoyage base apt
-sudo clean apt
+sudo apt clean
 sudo apt autoremove
 
 # Extinction VM
