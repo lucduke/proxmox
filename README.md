@@ -40,6 +40,12 @@ Série d'articles / de scripts permettant de personnaliser l'installation de **P
 
 
 
+## Création d'un template de VM
+
+[Lien vers l'article](./6-template.md)
+
+
+
 ## Références
 
 https://www.proxmox.com/en/
