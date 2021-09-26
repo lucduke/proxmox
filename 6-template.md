@@ -83,7 +83,7 @@ sudo docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -
 
 ```bash
 # Suppression des clefs SSH
-sudo rm sudo rm /etc/ssh/ssh_host_*
+sudo rm /etc/ssh/ssh_host_*
 
 # Suppression du machine-id
 sudo truncate -s 0 /etc/machine-id
