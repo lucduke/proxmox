@@ -2,6 +2,8 @@
 
 
 
+Dans cet article, nous allons voir comment créer un template qui nous permettra de créer des clones de machines virtuelles. Dans cet exemple, les clones seront des machines virtuelles basées sur debian 11.
+
 ## Téléchargement ISO Debian 11
 
 ```
