@@ -105,10 +105,20 @@ sudo poweroff
 1- Enlever le CD-ROM dans l'onglet matériel
 
 
+## Cloud-init
+
+Pour faciliter la personnalisation des clones du template, on peut venir attacher à ce dernier un lecteur cloud-init
+
+Dans l'onglet cloud-init associé au template, on peut ainsi créer par défaut un utilisateur particulier et son mot de passe, ajouter une clef publique SSH (pour faciliter la connexion en SSH) et définir la configuration réseau.
+
+Une fois ces paramètres renseignés, il faut cliquer sur regénérer l'image
+
+Au 1er démarrage du clone, cloud-init va mettre à jour le système, créer l'utilisateur sur la VM, regénérer les clefs SSH et personnaliser les fichiers hosts et hostnames en fonction du nom de la VM
+
 
 ## Attention
 
-Ne pas oublier de changer le nom d'hôte des VM crées à partir de ce template
+Ne pas oublier de changer le nom d'hôte des VM crées à partir de ce template si vous n'utilisez pas cloud-init
 
 ```bash
 sudo nano /etc/hostname
