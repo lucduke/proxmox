@@ -6,7 +6,7 @@ Dans cet article, nous allons voir comment créer un template qui nous permettra
 
 
 ## Tutoriel vidéo
-
+[lien](https://youtu.be/7ToFpdpPVHE)
 
 
 ## Téléchargement ISO Debian 11
