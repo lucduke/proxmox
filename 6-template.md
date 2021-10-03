@@ -115,6 +115,8 @@ Une fois ces paramètres renseignés, il faut cliquer sur regénérer l'image
 
 Au 1er démarrage du clone, cloud-init va mettre à jour le système, créer l'utilisateur sur la VM, regénérer les clefs SSH et personnaliser les fichiers hosts et hostnames en fonction du nom de la VM
 
+[Le lien vers l'illustration en vidéo](https://youtu.be/xfOKS853aXI)
+
 
 ## Attention
 
