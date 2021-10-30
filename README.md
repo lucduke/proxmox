@@ -46,6 +46,12 @@ Série d'articles / de scripts permettant de personnaliser l'installation de **P
 
 
 
+## Etendre l'espace disque d'une VM (partition lvm)
+
+[Lien vers l'article](./7-etendre_espace_dique_lvm.md)
+
+
+
 ## Références
 
 https://www.proxmox.com/en/
