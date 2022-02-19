@@ -94,6 +94,9 @@ sudo ln -s /etc/machine-id /var/lib/dbus/machine-id
 sudo apt clean
 sudo apt autoremove
 
+# Nettoyage historique des commandes
+history -c
+
 # Extinction VM
 sudo poweroff
 ```
