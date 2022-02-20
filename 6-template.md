@@ -94,7 +94,7 @@ sudo ln -s /etc/machine-id /var/lib/dbus/machine-id
 sudo apt clean
 sudo apt autoremove
 
-# Nettoyage historique des commandes sur le compte root et utilisateur.
+# Nettoyage de l'historique des commandes sur le compte root et utilisateur.
 history -c
 
 # Extinction VM
