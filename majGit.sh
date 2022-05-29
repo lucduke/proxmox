@@ -14,7 +14,7 @@ echo "Debut du script"
 echo "----------------------------------------------------------------"
 
 # MAJ  Github
-echo "MAJ Repo AnsibleDesktop"
+echo "MAJ Repo Proxmox"
 git add .
 git commit -m "Update"
 git push origin main
