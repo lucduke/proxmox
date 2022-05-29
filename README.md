@@ -52,6 +52,18 @@ Série d'articles / de scripts permettant de personnaliser l'installation de **P
 
 
 
+## Créer un serveur de fichier dans un conteneur LXC debian 11
+
+[Lien vers l'article](./8-filesrv.md)
+
+
+
+## Créer un serveur docker dans un conteneur LXC debian 11
+
+[Lien vers l'article](./9-dockersrv.md)
+
+
+
 ## Références
 
 https://www.proxmox.com/en/
