@@ -148,8 +148,6 @@ sudo apt install cifs-utils -y
 
 # Création du point de montage
 sudo mkdir -p /mnt/media
-sudo mkdir -p /mnt/documents
-sudo mkdir -p /mnt/docker-data-backup
 
 # Edition du fstab
 sudo nano /etc/fstab
@@ -159,7 +157,6 @@ On ajoute la ligne suivante
 
 ```
 //deb11-lxc-filesrv.home/media /mnt/media cifs _netdev,guest,exec,dir_mode=0775,file_mode=0664,uid=1000,gid=1000 0 0
-//rpi4-chris.home/docker-data-backup /mnt/docker-data-backup cifs _netdev,guest,exec,dir_mode=0775,file_mode=0664,uid=1000,gid=1000 0 0
 ```
 
 On monte le partage
@@ -171,14 +168,32 @@ sudo mount -a
 ## Backup de la config Docker
 
 ```bash
-# On installe rsync
+# Sur mon serveur hôte (i.e. le conteneur LXC deb11 docker), on installe rsync
 sudo apt install rsync -y
 
-# On tester la synchro
-sudo rsync --dry-run --archive --delete --verbose /srv/docker-data/ /mnt/docker-data-backup/
+# Sur mon serveur distant (un raspberry pi), je crée le repertoire de backup
+sudo mkdir -p /srv/rsync/docker-data-backup
 
-# Si OK, on entre les commandes dans un script qui sera executé via CRON par root
+# J'attribue la propriéte de ce répertoire à mon user pi
+sudo chown -R pi:pi /srv/rsync/docker-data-backup
+
+# On tester la synchro depuis l'hôte
+sudo rsync --dry-run --verbose --archive --compress --delete --progress /srv/docker-data/bitwarden/ pi@rpi4-chris.home:/srv/rsync/docker-data-backup/bitwarden/
+
+# Si OK, on met en place l'authentification par certificat entre l'hote et la destination
+# Sur l'hôte, on se connecte en root
 su -
+
+# On génère une clef d'authentification
+ssh-keygen -t rsa -b 4096 -C "root@dev11-lxc-docker"
+
+# On copie la clef publique sur l'hote distant
+ssh-copy-id -i /root/.ssh/id_rsa.pub pi@rpi4-chris.home
+
+# On teste la connexion
+ssh pi@rpi4-chris.home
+
+# Puis on entre les commandes de synchro dans un script qui sera executé via CRON par root
 touch /root/backup.sh
 nano /root/backup.sh
 ```
@@ -190,7 +205,7 @@ Contenu du script
 
 echo "Debut du traitement $(date '+%Y-%m-%d %H:%M:%S')"
 
-rsync --archive --delete /srv/docker-data/ /mnt/docker-data-backup/
+sudo rsync --archive --compress --delete --progress /srv/docker-data/ pi@rpi4-chris.home:/srv/rsync/docker-data-backup/
 
 echo "Fin du traitement $(date '+%Y-%m-%d %H:%M:%S')"
 ```
@@ -220,7 +235,7 @@ Contenu du crontab
 # |  |  |  |  |
 # *  *  *  *  *  user command to be executed
 
-# Execute le script de backup tous les jours 6h30
+# Execute le script de backup tous les jours 6h30 GMT
 30  6  *  *  *  /root/backup.sh >> /root/backup.log
 ```
 
