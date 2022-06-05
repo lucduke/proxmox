@@ -131,7 +131,7 @@ sudo docker volume create portainer_data
 sudo docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
 ```
 
-On teste la connexion : http://deb11-lxc-docker.home:9000/#/auth
+On teste la connexion : http://lxc-deb11-docker-test.home:9000/#/auth
 
 On personnalise l'environnement local
 
