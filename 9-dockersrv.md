@@ -2,6 +2,10 @@
 
 
 
+## Tutoriel vidéo
+
+[Lien vers la vidéo](https://youtu.be/PZHcdjfxCiA)
+
 ## Téléchargement du template
 
 Utilisation du template debian-11-standard
