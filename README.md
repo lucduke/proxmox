@@ -16,6 +16,12 @@ Série d'articles / de scripts permettant de personnaliser l'installation de **P
 
 
 
+## Configuration du gouverneur de CPU
+
+[Lien vers l'article](./11-cpu.md)
+
+
+
 ## Installation d'OMV 5
 
 [Lien vers l'article](./2-install_omv5.md)
