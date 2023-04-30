@@ -49,21 +49,27 @@ echo "deb http://download.proxmox.com/debian/pve buster pve-no-subscription" >> 
 
 ### Supprimer le pop-up en mode manuel
 
-```bash
-# Editer le scrip
-nano /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+``` bash
+# Editer le script
+vim /usr/share/per15/PVE/API2/Subscription.pm
 
-# Rechercher No valid subscription
+# Rechercher notfound
 # Texte origine
-Ext.Msg.show({
-  title: gettext('No valid subscription'),
+my $no_subscription_info = {
+	status => "notfound",
+	message => "There is no subscription key",
+	url => $url,
+};
 
 # Texte cible
-void({ //Ext.Msg.show({
-  title: gettext('No valid subscription'),
+my $no_subscription_info = {
+	status => "active",
+	message => "There is no subscription key",
+	url => $url,
+};
   
 # Redemarrer Proxmox webservice
-systemctl restart pveproxy.service
+systemctl restart pveproxy
 ```
 
 

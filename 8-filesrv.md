@@ -30,6 +30,9 @@ Après le 1er démarrage du conteneur
 # Maj système
 apt update
 apt full-upgrade -y
+
+# Maj le fuseau horaire
+dpkg-reconfigure tzdata
 ```
 
 ## Paramétrage SSH
