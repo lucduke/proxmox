@@ -122,7 +122,7 @@ vgs # Pour visualiser l'espace disponible
 lvcreate -n vms -L 827G pve
 
 # Formater le nouveau volume en ext4
-mkfs.ext4 /dev/pve/vms
+mkfs.ext4 -m 1 /dev/pve/vms
 
 # Monter le nouveau volume dans /mnt/vms
 mkdir -p /mnt/vms
@@ -175,9 +175,9 @@ lvcreate -n data-backup -L 2.7T pve2-vg-sdb
 
 # Formater le nouveau volume en ext4
 # Pour HDDA
-mkfs.ext4 /dev/pve2-vg-sda/data
+mkfs.ext4 -m 1 /dev/pve2-vg-sda/data
 # Pour HDDB
-mkfs.ext4 /dev/pve2-vg-sdb/data-backup
+mkfs.ext4 -m 1 /dev/pve2-vg-sdb/data-backup
 
 # Monter le nouveau volume dans /mnt/data et /mnt/data-backup
 mkdir -p /mnt/data
