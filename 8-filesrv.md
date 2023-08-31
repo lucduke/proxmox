@@ -120,7 +120,7 @@ sudo systemctl status smbd
 
 # Si absent
 sudo apt update
-sudo apt install samba -y
+sudo apt install samba samba-common cifs-utils -y
 
 # On stop le daemon
 sudo systemctl stop smbd
