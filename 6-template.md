@@ -37,27 +37,30 @@ reboot
 ```
 
 
-
 ## Installation de Docker
 
 ```bash
 # Source: https://docs.docker.com/engine/install/debian/
 # On supprime de potentielles anciennes installations
 sudo apt update
-sudo apt remove docker docker-engine docker.io containerd runc
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
 
 # On installe les paquets nécessaires
 sudo apt install -y apt-transport-https ca-certificates curl gnupg lsb-release
+sudo apt install
+
 
 # On ajoute la clef GPG officielle de Docker
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
 # On ajoute le dépôt
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # On installe docker engine
 sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io 
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo docker run hello-world
 
 # On installe docker-compose
@@ -73,6 +76,8 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```bash
 sudo docker volume create portainer_data
 sudo docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data --label com.centurylinklabs.watchtower.enable=true portainer/portainer-ce
+
+sudo docker run -d -p 8000:8000 -p 9000:9000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data --label com.centurylinklabs.watchtower.enable=true portainer/portainer-ce:latest
 
 # Pour se connecter: http://<ip_server>:9000/
 ```
