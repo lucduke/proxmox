@@ -172,3 +172,8 @@ On monte le partage
 sudo mount -a
 ```
 
+## Chargement partages NFS (pour les volumes NFS)
+
+```bash
+sudo apt install -y nfs-common
+```
