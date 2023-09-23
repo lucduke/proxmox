@@ -71,13 +71,22 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 
 
-## Installation de Portainer
+## Installation de Portainer (local volume)
 
 ```bash
 sudo docker volume create portainer_data
-sudo docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data --label com.centurylinklabs.watchtower.enable=true portainer/portainer-ce
 
 sudo docker run -d -p 8000:8000 -p 9000:9000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data --label com.centurylinklabs.watchtower.enable=true portainer/portainer-ce:latest
+
+# Pour se connecter: http://<ip_server>:9000/
+```
+
+## Installation de Portainer (nfs volume)
+
+```bash
+sudo docker volume create --driver local --opt type=nfs --opt o=addr=nas-hp.home,rw --opt device=:/srv/raid/nfs/docker/portainer_nfs_data portainer_nfs_data
+
+sudo docker run -d -p 8000:8000 -p 9000:9000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_nfs_data:/data --label com.centurylinklabs.watchtower.enable=true portainer/portainer-ce:latest
 
 # Pour se connecter: http://<ip_server>:9000/
 ```
