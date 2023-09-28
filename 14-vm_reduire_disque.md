@@ -20,16 +20,16 @@ On sauvegarde la VM via l'interface de proxmox
 
 On identifie le point de montage du stockage où est stocké l'image disque de la VM (Datacenter\Stockage)
 
-On créé un backup du fichier qcow2 sur lequel on souhaite travailler
+On créé un fichier temporaire qcow2 sur lequel on souhaite travailler
 
 ```bash
-cp /mnt/pve/nfs-raid/images/100/vm-100-disk-1.qcow2 /mnt/pve/nfs-raid/images/100/vm-100-disk-1.qcow2_bak
+cp /mnt/pve/nfs-raid/images/100/vm-100-disk-1.qcow2 /mnt/pve/nfs-raid/images/100/vm-100-disk-1.qcow2_tmp
 ```
 
 On réduit la taille du disque qcow2 pour récupérer l'espace libre
 
 ```bash
-qemu-img convert -O qcow2 /mnt/pve/nfs-raid/images/100/vm-100-disk-1.qcow2_bak /mnt/pve/nfs-raid/images/100/vm-100-disk-1.qcow2
+qemu-img convert -O qcow2 /mnt/pve/nfs-raid/images/100/vm-100-disk-1.qcow2_tmp /mnt/pve/nfs-raid/images/100/vm-100-disk-1.qcow2
 ```
 
 On redemarre la VM
@@ -37,8 +37,8 @@ On redemarre la VM
 qm start 100
 ```
 
-Si OK, on supprime le backup
+Si OK, on supprime le fichier temporaire
 
 ```bash
-/mnt/pve/nfs-raid/images/100/vm-100-disk-1.qcow2_bak
+/mnt/pve/nfs-raid/images/100/vm-100-disk-1.qcow2_tmp
 ```
