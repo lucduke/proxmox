@@ -135,7 +135,7 @@ sudo docker run hello-world
 ```bash
 # On installe
 sudo docker volume create portainer_data
-sudo docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --label com.centurylinklabs.watchtower.enable=true --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_nfs_data:/data portainer/portainer-ce
+sudo docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --label com.centurylinklabs.watchtower.enable=true --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
 ```
 
 On teste la connexion : http://lxc-deb11-docker-test.home:9000/#/auth
