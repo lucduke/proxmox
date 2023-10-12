@@ -89,80 +89,25 @@ Suivre les instructions disponibles [ici :](https://jellyfin.org/docs/general/in
 curl https://repo.jellyfin.org/install-debuntu.sh | bash
 ```
 
-
-
-
-## Paramétrage SSH sur le conteneur
+## Ajouter du groupe sgx à l'utilisateur jellyfin 
+On ajoute le groupe sgx à l'utilisateur jellyfin car ce groupe peut accéder aux devices vidéos
 
 ```bash
-# On créé le fichier de configuration
-nano /etc/ssh/sshd_config.d/my-config.conf
-```
-
-Contenu du fichier :
-
-```text
-Port 22
-
-# Logging
-SyslogFacility AUTH
-LogLevel INFO
-
-# Authentication
-LoginGraceTime 2m
-PermitRootLogin yes
-AllowGroups root ssh
-PermitEmptyPasswords no
-StrictModes yes
-MaxAuthTries 6
-MaxSessions 10
-PubkeyAuthentication yes
-
-X11Forwarding yes
-X11DisplayOffset 10
-```
-
-```bash
-# On relance le serveur SSH
-service ssh restart
-```
-
-## Installation de la commande sudo
-
-```bash
-apt install sudo -y
-```
-
-## Création d'un utilisateur
-
-```bash
-# Création de l'utilisateur
-adduser christophe
-
-# Ajout de groupes à l'utilisateur
-usermod -aG ssh,sudo christophe
-
-# On se connecte avec cet utilisateur
-su - christophe
-```
-
-## Sécurisation SSH
-
-```bash
-# On sécurise la connexion ssh en empêchant le login root
-sudo nano /etc/ssh/sshd_config.d/my-config.conf
-```
-
-On modifie la ligne `PermitRootLogin no`
-
-
-```bash
-# On relance le serveur SSH
-sudo service ssh restart
-```
-
-
-
-Préférer le conteneur de média fMP4-HLS
-
+ls -lha /dev/dri
 usermod -aG sgx jellyfin
+```
+
+On redémarrez le conteneur
+```bash
+reboot
+```
+
+## Se connecter à jellyfin
+
+Dans son navigateur, entre l'URL http://<localIP>:8096
+
+Dans le tableau de bord / Lecture :
+1) Sélectionner l'accélération matérielle VAAPI
+2) Paramétrer l'appareil VA-API `/dev/dri/renderD12`
+3) Activer le transcodage matériel pour les codecs suivants : H264, HEVC, MPEG2, VC1, HEVC10 bits
+4) Sauvegarder
