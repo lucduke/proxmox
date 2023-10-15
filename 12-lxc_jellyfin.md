@@ -14,16 +14,14 @@ Bien décocher "conteneur non privilégié"
 
 Création du rootfs de 8Go
 
-Configuration du conteneur avec 4 coeurs, 2Go de RAM
-
-Création d'un point de montage mp0 sur /srv/docker-data en décochant l'option backup
+Configuration du conteneur avec 2 coeurs, 2Go de RAM
 
 Au niveau du paramétrage DNS, renseigner home en DNS domain
 
 Après le 1er démarrage du conteneur
 
 - Activer Start at boot
-- Activer les features "Nesting" et "SMB/CIFS"
+- Activer l'option "SMB/CIFS"
 
 ## Modification du fichier de configuration du conteneur LXC
 
@@ -59,10 +57,12 @@ lxc.mount.entry: /dev/dri/renderD128 dev/dri/renderD128 none bind,optional,creat
 lxc.autodev: 1
 ```
 
+Vous devrez ensuite redémarrer le conteneur pour que les modifications s'appliquent dans ce dernier.
+
 ## Installation de VAINFO et des drivers MESA sur mon HOST
 
 ```bash
-sudo apt install vainfo mesa-va-drivers
+apt install vainfo mesa-va-drivers
 ``` 
 
 On execute ensuite `vainfo` pour vérifier le bon fonctionnement
@@ -108,6 +108,6 @@ Dans son navigateur, entre l'URL http://<localIP>:8096
 
 Dans le tableau de bord / Lecture :
 1) Sélectionner l'accélération matérielle VAAPI
-2) Paramétrer l'appareil VA-API `/dev/dri/renderD12`
+2) Paramétrer l'appareil VA-API `/dev/dri/renderD128`
 3) Activer le transcodage matériel pour les codecs suivants : H264, HEVC, MPEG2, VC1, HEVC10 bits
 4) Sauvegarder
