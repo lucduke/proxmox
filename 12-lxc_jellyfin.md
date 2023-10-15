@@ -2,7 +2,7 @@
 
 ## Tutoriel vidéo
 
-[Lien vers la vidéo](https://xxx)
+[Lien vers la vidéo](https://youtu.be/Vqr-0fI-99A)
 
 ## Téléchargement du template
 
