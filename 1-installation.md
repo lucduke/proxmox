@@ -51,7 +51,7 @@ echo "deb http://download.proxmox.com/debian/pve buster pve-no-subscription" >> 
 
 ``` bash
 # Editer le script
-vim /usr/share/per15/PVE/API2/Subscription.pm
+vim /usr/share/perl5/PVE/API2/Subscription.pm
 
 # Rechercher notfound
 # Texte origine
