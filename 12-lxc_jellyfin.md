@@ -23,7 +23,7 @@ Après le 1er démarrage du conteneur
 - Activer Start at boot
 - Activer l'option "SMB/CIFS"
 
-## Modification du fichier de configuration du conteneur LXC
+##  Modification du fichier de configuration du conteneur LXC
 
 ### Identification des numéros majeurs et mineurs des fichiers spéciaux associés aux périphériques de rendu
 
@@ -34,13 +34,13 @@ ls -l /dev/dri
 ```
 
 Retour terminal :
+
 ```text
 crw-rw---- 1 root video  226,   0 Sep 30 22:08 card0
 crw-rw---- 1 root render 226, 128 Sep 30 22:08 renderD128
 ```
 
 Dans mon cas, le numéro majeur est 226 dans les 2 cas et les numéros mineurs sont 0 et 128
-
 
 ### Modification de la configuration du conteneur pour lui donner accès à l'iGPU de mon HOST
 
@@ -63,7 +63,7 @@ Vous devrez ensuite redémarrer le conteneur pour que les modifications s'appliq
 
 ```bash
 apt install vainfo mesa-va-drivers
-``` 
+```
 
 On execute ensuite `vainfo` pour vérifier le bon fonctionnement
 
@@ -89,7 +89,8 @@ Suivre les instructions disponibles [ici :](https://jellyfin.org/docs/general/in
 curl https://repo.jellyfin.org/install-debuntu.sh | bash
 ```
 
-## Ajouter du groupe sgx à l'utilisateur jellyfin 
+## Ajouter du groupe sgx à l'utilisateur jellyfin
+
 On ajoute le groupe sgx à l'utilisateur jellyfin car ce groupe peut accéder aux devices vidéos
 
 ```bash
@@ -98,15 +99,17 @@ usermod -aG sgx jellyfin
 ```
 
 On redémarrez le conteneur
+
 ```bash
 reboot
 ```
 
 ## Se connecter à jellyfin
 
-Dans son navigateur, entre l'URL http://<localIP>:8096
+Dans son navigateur, entre l'URL <http://localIP:8096>
 
 Dans le tableau de bord / Lecture :
+
 1) Sélectionner l'accélération matérielle VAAPI
 2) Paramétrer l'appareil VA-API `/dev/dri/renderD128`
 3) Activer le transcodage matériel pour les codecs suivants : H264, HEVC, MPEG2, VC1, HEVC10 bits
