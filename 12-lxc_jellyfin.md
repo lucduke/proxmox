@@ -117,6 +117,8 @@ Dans le tableau de bord / Lecture :
 
 ## Suppression des fichiers temporaires de transcodage
 
+[Lien vers la vidéo](https://youtu.be/me6uCYqj1_Q)
+
 Se connecter en SSH sur le conteneur en tant que root et crée le script bash `delete_ts_files.sh` suivant :
 
 ```txt
@@ -152,3 +154,4 @@ Pour une execution hebdomadaire chaque samedi à minuit
 
 ```bash
 0 0 * * 6 /root/delete_ts_files.sh
+```
