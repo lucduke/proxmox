@@ -114,3 +114,41 @@ Dans le tableau de bord / Lecture :
 2) Paramétrer l'appareil VA-API `/dev/dri/renderD128`
 3) Activer le transcodage matériel pour les codecs suivants : H264, HEVC, MPEG2, VC1, HEVC10 bits
 4) Sauvegarder
+
+## Suppression des fichiers temporaires de transcodage
+
+Se connecter en SSH sur le conteneur en tant que root et crée le script bash `delete_ts_files.sh` suivant :
+
+```txt
+#!/bin/bash
+
+# Specify the directory path
+transcodes_directory="/var/lib/jellyfin/transcodes"
+
+# Check if the directory exists
+if [ -d "$transcodes_directory" ]; then
+    # Delete .ts files in the specified directory
+    find "$transcodes_directory" -type f -name "*.ts" -delete
+
+    echo "Deleted .ts files in $transcodes_directory"
+else
+    echo "Error: Directory $transcodes_directory not found."
+fi
+```
+
+Rendre ce script executable
+
+```bash
+chmod +x delete_ts_files.sh
+```
+
+Si besoin, planifier son execution dans cron
+
+```bash
+crontab -e
+```
+
+Pour une execution hebdomadaire chaque samedi à minuit
+
+```bash
+0 0 * * 6 /root/delete_ts_files.sh
