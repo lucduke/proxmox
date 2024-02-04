@@ -7,11 +7,13 @@
 ## Procédure
 
 On commence par lister les VM sur son hôte proxmox
+
 ```bash
 qm list
 ```
 
 On arrête ensuite la VM sur laquelle on souhaite intervenir (la 100 dans mon exemple)
+
 ```bash
 qm stop 100
 ```
@@ -33,6 +35,7 @@ qemu-img convert -O qcow2 /mnt/pve/nfs-raid/images/100/vm-100-disk-1.qcow2_tmp /
 ```
 
 On redemarre la VM
+
 ```bash
 qm start 100
 ```

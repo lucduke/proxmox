@@ -2,7 +2,7 @@
 
 ## Tutoriel vidéo
 
-[Lien vers la vidéo]()
+[Lien vers la vidéo](https://)
 
 ## Etape 1 : téléchargement de l'image cloud sur le site de debian
 

@@ -1,7 +1,5 @@
 # Backup via Rsync
 
-
-
 ## Installation de Rsync
 
 ```bash
@@ -9,8 +7,6 @@
 sudo apt update
 sudo apt install rsync -y
 ```
-
-
 
 ## Backup de la config Docker
 
@@ -70,7 +66,7 @@ crontab -e
 
 Contenu du crontab
 
-```
+```text
 # Example of job definition:
 # .---------------- minute (0 - 59)
 # |  .------------- hour (0 - 23)
@@ -83,10 +79,3 @@ Contenu du crontab
 # Execute le script de backup tous les jours 6h30 GMT
 30  6  *  *  *  /root/backup.sh >> /root/backup.log
 ```
-
-
-
-
-
-
-
