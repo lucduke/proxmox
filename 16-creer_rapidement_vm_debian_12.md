@@ -58,7 +58,7 @@ Optionel : si vous souhaitez que la machine virtuelle soit avec un bios UEFI
 
 ```bash
 qm set 1000 --bios ovmf --machine q35
-qm set 1000 --efidisk0 nfs-raid:vm-1000-disk-1,size=4M
+qm set 1000 --efidisk0 nfs-raid:1000/vm-1000-disk-1,size=4M
 ```
 
 ## Etape 3 : Paramétrage de cloud-init
