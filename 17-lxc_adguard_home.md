@@ -62,3 +62,10 @@ sudo /opt/AdGuardHome/AdGuardHome -s start|stop|restart|status|install|uninstall
 Dans son navigateur, entre l'URL <http://localIP:3000>
 
 On effectue via l'IHM les dernières étapes de configuration dans la création de son utilisateur
+
+## Exemple de Parametres DNS dans la configuration Serveurs DNS upstream
+
+```text
+https://dns10.quad9.net/dns-query
+[/*.home/]192.168.1.1
+```

@@ -50,9 +50,13 @@ Série d'articles / de scripts permettant de personnaliser l'installation de **P
 
 [Lien vers l'article](./10-rsync.md)
 
-## Création d'un conteneur LXC gérant l'accélération matérielle de mon iGPU pour Jellyfin
+## Création d'un conteneur LXC gérant l'accélération matérielle de mon iGPU pour Jellyfin (conteneur privilégié)
 
 [Lien vers l'article](./12-lxc_jellyfin.md)
+
+## Création d'un conteneur LXC gérant l'accélération matérielle de mon iGPU pour Jellyfin (conteneur non privilégié)
+
+[Lien vers l'article](./12-lxc_jellyfin_v2.md)
 
 ## Réduire la taille du disque d'un conteneur LXC
 
