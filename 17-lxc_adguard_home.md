@@ -21,7 +21,7 @@ Utilisation du template debian-12-standard
 
 Création du rootfs de 8Go
 
-Configuration du conteneur avec 2 coeurs, 2Go de RAM
+Configuration du conteneur avec 1 coeurs, 512Mo de RAM
 
 Au niveau du paramétrage Réseau, sélectionner `DHCP` pour IPv4
 
@@ -32,6 +32,9 @@ Après le 1er démarrage du conteneur, activer `Start at boot`
 On se connext en SSH sur le conteneur
 
 ```bash
+# Pour connaitre l'adresse IP du conteneur
+ip addr show dev eth0 | grep inet | awk '{print $2}' | sed 's/\/.*$//'
+
 # Maj système
 apt update
 apt full-upgrade -y
