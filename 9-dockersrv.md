@@ -84,7 +84,7 @@ apt install sudo -y
 adduser christophe
 
 # Ajout de groupes à l'utilisateur
-usermod -aG ssh,sudo christophe
+usermod -aG sudo christophe
 
 # On se connecte avec cet utilisateur
 su - christophe
