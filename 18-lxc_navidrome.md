@@ -18,14 +18,16 @@
 ## Étape 1 : Téléchargement du script d'installation sur votre hôte Proxmox
 
 ```bash
-wget https://raw.githubusercontent.com/Navidrome/Navidrome/main/scripts/linux/navidrome.sh
+wget https://raw.githubusercontent.com/lucduke/proxmox/refs/heads/main/navidrome.sh
 chmod +x navidrome.sh
 ```
 
 ##  Etape 2 : Création du conteneur LXC via un script Bash
 
-```bash
+Dans le script bash, personnalisez les variables définies en début de script ainsi que la clef ssh à utiliser pour la connexion au conteneur.
+
+On execute ensuite le script bash pour créer le conteneur LXC et installer Navidrome.
 
 ```bash
-lxc launch ubuntu:22.04 navidrome -c limits.cpu=2 -c limits.memory=1GB
-lxc config device override navidrome root size=5GB
+bash navidrome.sh
+```
