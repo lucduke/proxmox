@@ -9,7 +9,7 @@ STORAGE_TEMPLATE="nfs1-no-raid"          # Stockage pour les templates. Defaut =
 CORES="2"                                # Nombre de cœurs CPU
 MEMORY="512"                             # Mémoire en MB
 SWAP="512"                               # Swap en MB
-DISK_SIZE="8"                            # Taille du disque en Go
+DISK_SIZE="5"                            # Taille du disque en Go
 NET_BRIDGE="vmbr0"                       # Interface réseau
 MP_MUSIC="/mnt/lxc/music"                # Point de montage de la musique
 MUSIC_DIR="/media/music"                 # Répertoire de stockage de la musique
@@ -105,6 +105,10 @@ check_success
 pct exec $CT_ID -- bash -c "install -d -o ${USER} -g ${GROUP} /opt/navidrome"
 check_success
 pct exec $CT_ID -- bash -c "install -d -o ${USER} -g ${GROUP} /var/lib/navidrome"
+check_success
+pct exec $CT_ID -- bash -c "groupadd -g 10000 lxc_samba"
+check_success
+pct exec $CT_ID -- bash -c "usermod -aG lxc_samba ${USER}"
 check_success
 
 # Téléchargement de Navidrome
