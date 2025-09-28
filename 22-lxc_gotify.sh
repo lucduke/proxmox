@@ -1,28 +1,32 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Script pour créer un conteneur LXC sous Proxmox et installer Ansible
+# Script pour créer un conteneur LXC sous Proxmox, installer Gotify
+# Source : https://github.com/gotify/server
 # Configuration :
 # - Template : debian-13
-# - Nom : ct-deb13-ansible
-# - Disque : 6G
+# - Nom : ct-deb-gotify
+# - Disque : 2G
 # - CPU : 1
 # - RAM : 512M
 # - Réseau : DHCP sur vmbr0
-# - Ansible : installé via apt
+# - Gotify : installé via binaire dans /opt/gotify
 
+# Variables
 set -e  # Arrêter en cas d'erreur
 
 # Variables configurables
-HOSTNAME="ct-deb13-ansible"              # Nom d'hôte
+HOSTNAME="ct-deb-gotify"                 # Nom d'hôte
 PASSWORD="motdepasse"                    # Mot de passe root
 STORAGE="local-lvm"                      # Stockage Proxmox
 STORAGE_TEMPLATE="nfs1-no-raid"          # Stockage pour les templates. Defaut = local
 CORES="1"                                # Nombre de cœurs CPU
 MEMORY="512"                             # Mémoire en MB
 SWAP="512"                               # Swap en MB
-DISK_SIZE="6"                            # Taille du disque en Go
+DISK_SIZE="2"                            # Taille du disque en Go
 NET_BRIDGE="vmbr0"                       # Interface réseau
 TEMPLATE_NAME=""                         # Modèle Debian 13
+VERSION="2.7.3"                          # Version de Gotify
+PLATFORM="linux-amd64"                   # Plateforme (linux-amd64, linux-arm64, etc.)
 
 # Fonction pour vérifier si l'utilisateur est root
 check_root() {
@@ -58,15 +62,14 @@ create_container() {
         --storage $STORAGE \
         --rootfs $STORAGE:$DISK_SIZE \
         --net0 name=eth0,bridge=$NET_BRIDGE,ip=dhcp \
-        --ssh-public-keys /root/id_ed25519.pub \
+        --ssh-public-keys /root/.ssh/id_chris-i5.pub \
         --unprivileged 1 \
         --features nesting=1 \
         --onboot 1 \
         --start 0
 }
 
-
-echo "=== Création du conteneur LXC pour Ansible ==="
+echo "=== Création du conteneur LXC pour Gotify ==="
 
 # Vérifier si l'utilisateur est root
 check_root
@@ -89,20 +92,50 @@ pct start $CT_NEXT_ID
 echo "Attente du démarrage..."
 sleep 10
 
-# Installer Ansible
-echo "Installation d'Ansible..."
-pct exec $CT_NEXT_ID -- bash -c "apt update && apt full-upgrade -y && locale-gen fr_FR.UTF-8 && dpkg-reconfigure locales && update-locale"
-pct exec $CT_NEXT_ID -- bash -c "echo 'LANGUAGE=fr_FR.UTF-8' >> /etc/default/locale"
-pct exec $CT_NEXT_ID -- bash -c "echo 'LC_ALL=fr_FR.UTF-8' >> /etc/default/locale"
-pct exec $CT_NEXT_ID -- bash -c "export DEBIAN_FRONTEND=noninteractive && ln -fs /usr/share/zoneinfo/Europe/Paris /etc/localtime && dpkg-reconfigure --frontend noninteractive tzdata"
-pct exec $CT_NEXT_ID -- bash -c "apt install -y ansible"
+# Maj du conteneur et installation des dépendances
+echo "Mise à jour du conteneur..."
+pct exec $CT_NEXT_ID -- bash -c "apt update && apt full-upgrade -y && apt install -y unzip"
 
-# Vérifier l'installation
-echo "Vérification de l'installation d'Ansible..."
-pct exec $CT_NEXT_ID -- bash -c "export LANG=fr_FR.UTF-8 && ansible --version"
+# Installer Gotify dans le conteneur
+echo "Installation de Gotify..."
+pct exec $CT_NEXT_ID -- bash -c "mkdir -p /opt/gotify && cd /tmp && \
+wget https://github.com/gotify/server/releases/download/v${VERSION}/gotify-${PLATFORM}.zip && \
+unzip gotify-${PLATFORM}.zip && \
+chmod +x gotify-${PLATFORM} && \
+mv gotify-${PLATFORM} /opt/gotify/gotify-${PLATFORM}"
 
+# Ajouter Gotify au démarrage du conteneur en créant un service systemd
+echo "Configuration du service systemd pour Gotify..."
+pct exec $CT_NEXT_ID -- bash -c "cat <<EOF > /etc/systemd/system/gotify.service
+[Unit]
+Description=Gotify Service
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt/gotify
+ExecStart=/opt/gotify/gotify-${PLATFORM}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF"
+
+pct exec $CT_NEXT_ID -- systemctl daemon-reload
+pct exec $CT_NEXT_ID -- systemctl enable gotify.service
+pct exec $CT_NEXT_ID -- systemctl start gotify.service
+
+
+# Récupérer l'adresse IP du conteneur
+CT_IP=$(pct exec $CT_NEXT_ID -- hostname -I | awk '{print $1}')
+
+# Afficher les informations de connexion
 echo "=== Conteneur créé avec succès ==="
 echo "ID : $CT_NEXT_ID"
 echo "Nom : $HOSTNAME"
 echo "Pour accéder : pct enter $CT_NEXT_ID"
 echo "Pour arrêter : pct stop $CT_NEXT_ID"
+echo "Pour se connecter à Gotify : http://$CT_IP:80"
+echo "Utilisateur par défaut : admin"
+echo "Mot de passe par défaut : admin"  # À changer après la première connexion
+echo "=================================="

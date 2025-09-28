@@ -162,6 +162,6 @@ pct exec $CT_NEXT_ID -- bash -c "podman ps"
 
 echo "=== Conteneur créé avec succès ==="
 echo "ID : $CT_NEXT_ID"
-echo "Nom : ct-deb13-ansible"
+echo "Nom : $HOSTNAME"
 echo "Pour accéder : pct enter $CT_NEXT_ID"
 echo "Pour arrêter : pct stop $CT_NEXT_ID"
