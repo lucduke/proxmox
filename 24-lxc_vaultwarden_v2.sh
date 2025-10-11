@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Script pour créer un conteneur LXC sous Proxmox, installer podman et configurer Cloudflare
-# Source : https://one.dash.cloudflare.com
+# Script pour créer un conteneur LXC sous Proxmox, installer podman et configurer Vaultwarden
+# Source : https://github.com/dani-garcia/vaultwarden
 # Configuration :
 # - Template : debian-13
-# - Nom : ct-deb-cloudflare
+# - Nom : ct-deb-vaultwarden
 # - Disque : 4G
 # - CPU : 1
 # - RAM : 512M
@@ -17,7 +17,7 @@ source /opt/scripts/0-commons.sh
 set -e  # Arrêter en cas d'erreur
 
 # Variables configurables
-HOSTNAME="ct-deb-cloudflare"               # Nom d'hôte
+HOSTNAME="ct-deb-vaultwarden"               # Nom d'hôte
 PASSWORD="motdepasse"                       # Mot de passe root
 STORAGE="local-lvm"                         # Stockage Proxmox
 STORAGE_TEMPLATE="nfs1-no-raid"             # Stockage pour les templates. Defaut = local
@@ -27,9 +27,8 @@ SWAP="512"                                  # Swap en MB
 DISK_SIZE="4"                               # Taille du disque en Go
 NET_BRIDGE="vmbr0"                          # Interface réseau
 TEMPLATE_NAME=""                            # Modèle Debian 13
-CLOUDFLARE_TUNNEL_TOKEN="votre_token_de_tunnel"  # Remplacez par votre token de tunnel Cloudflare
 
-echo_blue "=== Création du conteneur LXC pour Cloudflare ==="
+echo_blue "=== Création du conteneur LXC pour Vaultwarden ==="
 
 # Vérifier si l'utilisateur est root
 check_root
@@ -56,43 +55,43 @@ sleep 10
 echo_blue "Installation de Podman..."
 pct exec $CT_NEXT_ID -- bash -c "apt update && apt full-upgrade -y && apt install -y podman"
 
-# Installer cloudflared dans le conteneur Podman via un quadlets
-echo_blue "Installation de cloudflare..."
-pct exec $CT_NEXT_ID -- bash -c "mkdir -p /etc/containers/systemd"
-pct exec $CT_NEXT_ID -- bash -c "cat > /etc/containers/systemd/cloudflare.container <<EOF
+# Générer le token admin
+generate_argon2_hash
+echo_blue "Token admin généré."
+
+# Installer Vaultwarden dans le conteneur Podman via un quadlet
+echo_blue "Installation de Vaultwarden..."
+pct exec $CT_NEXT_ID -- bash -c "cat > /etc/containers/systemd/vaultwarden.container <<EOF
 [Unit]
-Description=Cloudflare Container
-After=network-online.target
+Description=Vaultwarden Container
 Wants=network-online.target
+After=network-online.target
 
 [Container]
-Image=docker.io/cloudflare/cloudflared:latest
-ContainerName=cloudflare
+Image=docker.io/vaultwarden/server:latest 
+ContainerName=vaultwarden
 AutoUpdate=registry
-EnvironmentFile=/etc/cloudflare.env
-Exec=tunnel --no-autoupdate run
+PublishPort=80:80/tcp
+Environment=SIGNUPS_ALLOWED=true
+Environment= ADMIN_TOKEN=${ADMIN_TOKEN}
+Volume=vaultwarden-data:/data
 
 [Service]
-Restart=on-failure
-TimeoutStartSec=900
+Restart=always
 
 [Install]
-WantedBy=multi-user.target default.target
+WantedBy=default.target
 EOF"
 
-# Création du fichier .env pour Cloudflare
-EnvironmentFile=/etc/cloudflare.env
-pct exec $CT_NEXT_ID -- bash -c "cd /etc && cat > cloudflare.env <<EOF
-# Token du tunnel Cloudflare
-TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
-EOF"
+# Rappel
+echo_blue "Le volume est géré dans /var/lib/containers/storage/volumes/vaultwarden-data/_data"
 
-# Activer et démarrer le service Cloudflare
-echo_blue "Activation et démarrage du service Cloudflare..."
-pct exec $CT_NEXT_ID -- bash -c "systemctl daemon-reload && systemctl start cloudflare.service && systemctl status cloudflare.service"
+# Activer et démarrer le service Vaultwarden
+echo_blue "Activation et démarrage du service Vaultwarden..."
+pct exec $CT_NEXT_ID -- bash -c "systemctl daemon-reload && systemctl start vaultwarden.service && systemctl status vaultwarden.service"
 
 # Vérifier que le conteneur Podman fonctionne
-echo_blue "Vérification de l'installation de Cloudflare..."
+echo_blue "Vérification de l'installation de Vaultwarden..."
 pct exec $CT_NEXT_ID -- bash -c "podman ps"
 
 # Récupérer l'adresse IP du conteneur
@@ -103,3 +102,4 @@ echo_blue "ID : $CT_NEXT_ID"
 echo_blue "Nom : $HOSTNAME"
 echo_blue "Pour accéder : pct enter $CT_NEXT_ID"
 echo_blue "Pour arrêter : pct stop $CT_NEXT_ID"
+echo_blue "Pour se connecter à Vaultwarden, passez imperativement par votre reverse proxy : https://$CT_IP"

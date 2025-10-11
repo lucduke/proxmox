@@ -19,8 +19,12 @@ download_template_if_needed() {
     fi
 }
 
-# Fonction pour créer le conteneur
 create_container() {
+    local -i unprivileged="${1:-1}"  # 1 par défaut si aucun argument ; 0 = privilégié
+    case "$unprivileged" in
+        1|0) ;; # ok
+        *) unprivileged=1 ;; # valeur par défaut sécurisée
+    esac
     pct create $CT_NEXT_ID \
         ${STORAGE_TEMPLATE}:vztmpl/$TEMPLATE_NAME \
         --ostype debian \
@@ -33,7 +37,7 @@ create_container() {
         --rootfs $STORAGE:$DISK_SIZE \
         --net0 name=eth0,bridge=$NET_BRIDGE,ip=dhcp \
         --ssh-public-keys /root/.ssh/id_chris-i5.pub \
-        --unprivileged 1 \
+        --unprivileged "$unprivileged" \
         --features nesting=1 \
         --onboot 1 \
         --start 0
@@ -46,4 +50,9 @@ generate_argon2_hash() {
         apt install -y argon2
     fi
     ADMIN_TOKEN=$(echo -n "MySecretPassword" | argon2 "$(openssl rand -base64 32)" -e -id -k 65540 -t 3 -p 4)
+}
+
+# Fonction pour écrire du texte en bleu
+echo_blue() {
+    echo -e "\033[1;34m$1\033[0m\n"
 }
