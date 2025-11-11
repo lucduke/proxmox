@@ -1,7 +1,5 @@
 # Upgrade vers la version 7 de Proxmox Virtual Environment
 
-
-
 ## Les principales nouveautés
 
 - Introduction de Debian 11 "Bullseye" et du kernel Linux 5.11
@@ -12,17 +10,11 @@
 - La gestion du téléchargement des ISO à travers un IHM dédié
 - ...
 
-
-
 La release note est disponible ici : https://pve.proxmox.com/wiki/Roadmap#Proxmox_VE_7.0
 
-
-
 ## Tutoriel vidéo
+
 [lien](https://youtu.be/cfUCejR8ads)
-
-
-
 
 ## L'upgrade de la 6.x vers la 7
 
@@ -50,8 +42,14 @@ apt update
 
 # Executer l'upgrade
 apt dist-upgrade
+```
 
-# Redemarrer l'hôte
+## Redemarrer l'hôte
+
+```shell
 reboot
 ```
 
+## Création d'un mdp d'application dans GMAIL
+
+Pour les utilisateurs de GMAIL, il est nécessaire de créer un mot de passe d'application pour permettre à Proxmox d'envoyer des emails via le SMTP de GMAIL [lien.](https://support.google.com/accounts/answer/185833?hl=fr)
