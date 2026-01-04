@@ -107,4 +107,6 @@ echo_blue "Accéder à Nextcloud AIO via : https://$CT_IP:8080"
 echo_blue "Configurer le tunnel cloudflare en référençant le port 11000"
 echo_blue "Pour executer une commande occ : podman exec -it --user www-data nextcloud-aio-nextcloud php occ maintenance:repair --include-expensive"
 echo_blue "Pour ajuster la taille maximale des fichiers uploadés, modifier dans occ : podman exec -it --user www-data nextcloud-aio-nextcloud php occ config:system:set --type int --value 94371840 files.chunked_upload.max_size"
-echo_blue "Pour ajouter un timeout a la configuration mail, modifier dans occ : podman exec -it --user www-data nextcloud-aio-nextcloud php occ config:system:set --type int --value 30 mail_smtptimeout
+echo_blue "Pour ajouter un timeout a la configuration mail, modifier dans occ : podman exec -it --user www-data nextcloud-aio-nextcloud php occ config:system:set --type int --value 30 mail_smtptimeout"
+echo_blue "Pour arrêter le conteneur Nextcloud AIO : systemctl stop nextcloud-aio.service"
+echo_blue "Pour visualiser les logs : journalctl -u nextcloud-aio.service -f"
